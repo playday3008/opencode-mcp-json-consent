@@ -2,15 +2,22 @@
 
 Import a project's `.mcp.json` into OpenCode V2, with approval before starting local servers or connecting to remote servers. Native OpenCode definitions with the same name take precedence.
 
-This package is not published yet.
+This package is not published to npm yet.
 
 ## Installation
 
-Build and install a local package from this repository:
+Download the `opencode-mcp-json-consent-<commit>` artifact from a GitHub Actions run whose OpenCode 2.2.5 job passed, and extract the ZIP to obtain the installable `.tgz`. CI uploads the exact package installed and tested by that job. Artifacts are retained for 14 days and remain available if the latest-version compatibility job fails.
+
+Alternatively, build the package from a clone of this repository:
 
 ```sh
 npm pack
-npm install --prefix /absolute/path/to/plugin-install --omit=dev --ignore-scripts ./opencode-mcp-json-consent-0.1.0.tgz
+```
+
+Install the downloaded or locally built tarball:
+
+```sh
+npm install --prefix /absolute/path/to/plugin-install --omit=dev --ignore-scripts /path/to/opencode-mcp-json-consent-0.1.0.tgz
 ```
 
 Add the installed directory to `plugins` in your global or project `opencode.jsonc`, preserving other settings:
@@ -85,6 +92,8 @@ The Web client may offer custom input despite `custom: false`. Backend validatio
 ## Verification and development
 
 Tested with OpenCode **2.2.5** on Fedora Linux x86-64. Manual package checks confirmed CLI and Web approval through managed-service discovery. Other versions, platforms, and service modes are not verified. The package has no runtime dependencies. Development uses Node.js from `.node-version`, Python 3.12 or later, and uv.
+
+Local baseline checks use OpenCode 2.2.5 on `PATH`. CI tests both 2.2.5 and the latest stable CLI on pushes, pull requests, and a weekly schedule. Each job installs its CLI separately and logs the resolved version; project dependency pins stay unchanged. Latest-version failures fail the workflow but do not cancel the baseline job or block its package artifact.
 
 ```sh
 npm ci
