@@ -6,6 +6,23 @@ This package is not published to npm yet.
 
 ## Installation
 
+Use OpenCode's managed shared service. The plugin invokes `opencode api` through `PATH` to create native approval forms; that command must reach the service that owns the session. Standalone mode and arbitrary explicit-server configurations are not supported.
+
+### Git tag (recommended)
+
+Add this entry to `plugins` in your global or project `opencode.jsonc`, preserving other settings:
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugins": ["github:playday3008/opencode-mcp-json-consent#v0.1.0"],
+}
+```
+
+OpenCode fetches and caches the Git package. No manual clone, local npm installation, or npm registry publication is needed. For a stricter source pin, replace `#v0.1.0` with a full commit hash; Git tags can be moved.
+
+### CI artifact or local tarball
+
 Download the `opencode-mcp-json-consent-<commit>` artifact from a GitHub Actions run whose OpenCode 2.2.5 job passed, and extract the ZIP to obtain the installable `.tgz`. CI uploads the exact package installed and tested by that job. Artifacts are retained for 14 days and remain available if the latest-version compatibility job fails.
 
 Alternatively, build the package from a clone of this repository:
@@ -30,8 +47,6 @@ Add the installed directory to `plugins` in your global or project `opencode.jso
   ],
 }
 ```
-
-Use OpenCode's managed shared service. The plugin invokes `opencode api` through `PATH` to create native approval forms; that command must reach the service that owns the session. Standalone mode and arbitrary explicit-server configurations are not supported.
 
 ## Review and revocation
 
